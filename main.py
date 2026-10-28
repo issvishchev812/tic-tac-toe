@@ -1,6 +1,5 @@
 cells = [" " for i in range(9)]
 
-
 def input_check(cells):
     print("Введите номер клетки, которую хотите отметить (1-9)")
     while True:
@@ -17,4 +16,35 @@ def input_check(cells):
             print("Некорректный номер клетки. Введите цифру от 1 до 9")
 
 
-input_check(cells)
+def rules(cells, current):
+    print(f"Ходит {current}")
+    current_cell = input_check(cells)
+    cells[current_cell-1] = current
+    if current == 'X':
+        current = 'O'
+    else:
+        current = 'X'
+    print_board(cells)
+    return current
+
+
+def print_board(cells):
+    count = 0
+    print('-------------------')
+    for cell in cells:
+        count += 1
+        if count % 3 == 0:
+            print(f'|  {cell}  |', end='\n')
+            print('-------------------')
+        else:
+            print(f'|  {cell}  ', end='')
+
+def main():
+    cur = 'X'
+    while True:  # Потом здесь будет на победителя/ничью
+        cur = rules(cells, cur)
+
+
+if __name__ == '__main__':
+    print_board(cells)
+    main()
