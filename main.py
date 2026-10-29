@@ -1,5 +1,6 @@
 cells = [" " for i in range(9)]
 
+
 def input_check(cells):
     print("Введите номер клетки, которую хотите отметить (1-9)")
     while True:
@@ -19,7 +20,7 @@ def input_check(cells):
 def rules(cells, current):
     print(f"Ходит {current}")
     current_cell = input_check(cells)
-    cells[current_cell-1] = current
+    cells[current_cell - 1] = current
     if current == 'X':
         current = 'O'
     else:
@@ -41,31 +42,42 @@ def print_board(cells):
 
 
 def win(cells):
-    if (cells[0] == cells[1] == cells[2] != ' '):
+    if cells[0] == cells[1] == cells[2] != ' ':
         return cells[0]
-    if (cells[3] == cells[4] == cells[5] != ' '):
+    if cells[3] == cells[4] == cells[5] != ' ':
         return cells[3]
-    if (cells[6] == cells[7] == cells[8] != ' '):
+    if cells[6] == cells[7] == cells[8] != ' ':
         return cells[6]
-    if (cells[0] == cells[4] == cells[8] != ' '):
+    if cells[0] == cells[4] == cells[8] != ' ':
         return cells[0]
-    if (cells[2] == cells[4] == cells[6] != ' '):
+    if cells[2] == cells[4] == cells[6] != ' ':
         return cells[2]
-    if (cells[0] == cells[3] == cells[6] != ' '):
+    if cells[0] == cells[3] == cells[6] != ' ':
         return cells[0]
-    if (cells[1] == cells[4] == cells[7] != ' '):
+    if cells[1] == cells[4] == cells[7] != ' ':
         return cells[1]
-    if (cells[2] == cells[5] == cells[8] != ' '):
+    if cells[2] == cells[5] == cells[8] != ' ':
         return cells[2]
     return None
+
+
+def draw(cells):
+    return all(cell != ' ' for cell in cells)
+
 
 def main():
     cur = 'X'
     winner = win(cells)
-    while not winner:
+    is_draw = draw(cells)
+    while not winner and not is_draw:
         cur = rules(cells, cur)
         winner = win(cells)
-    print(f"Победил {winner}")
+        is_draw = draw(cells)
+    if winner:
+        print(f"Победил {winner}")
+    else:
+        print("Ничья")
+
 
 if __name__ == '__main__':
     print_board(cells)
