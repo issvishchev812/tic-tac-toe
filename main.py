@@ -39,11 +39,33 @@ def print_board(cells):
         else:
             print(f'|  {cell}  ', end='')
 
+
+def win(cells):
+    if (cells[0] == cells[1] == cells[2] != ' '):
+        return cells[0]
+    if (cells[3] == cells[4] == cells[5] != ' '):
+        return cells[3]
+    if (cells[6] == cells[7] == cells[8] != ' '):
+        return cells[6]
+    if (cells[0] == cells[4] == cells[8] != ' '):
+        return cells[0]
+    if (cells[2] == cells[4] == cells[6] != ' '):
+        return cells[2]
+    if (cells[0] == cells[3] == cells[6] != ' '):
+        return cells[0]
+    if (cells[1] == cells[4] == cells[7] != ' '):
+        return cells[1]
+    if (cells[2] == cells[5] == cells[8] != ' '):
+        return cells[2]
+    return None
+
 def main():
     cur = 'X'
-    while True:  # Потом здесь будет на победителя/ничью
+    winner = win(cells)
+    while not winner:
         cur = rules(cells, cur)
-
+        winner = win(cells)
+    print(f"Победил {winner}")
 
 if __name__ == '__main__':
     print_board(cells)
