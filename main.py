@@ -1,5 +1,3 @@
-cells = [" " for i in range(9)]
-
 
 def input_check(cells):
     print("Введите номер клетки, которую хотите отметить (1-9)")
@@ -66,6 +64,8 @@ def draw(cells):
 
 
 def main():
+    cells = [" " for i in range(9)]
+    print_board(cells)
     cur = 'X'
     winner = win(cells)
     is_draw = draw(cells)
@@ -80,5 +80,9 @@ def main():
 
 
 if __name__ == '__main__':
-    print_board(cells)
-    main()
+    restart = 'да'
+    while restart.lower() == 'да':
+        main()
+        restart = input('Сыграть еще раз? (да/нет)\n')
+
+
